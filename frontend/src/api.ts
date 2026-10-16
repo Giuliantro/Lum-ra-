@@ -10,6 +10,9 @@ export class ApiError extends Error {
   }
 }
 
+// Backend origin; empty in development, where Vite proxies /api to :8000
+const API_URL = (import.meta.env.VITE_API_URL ?? '').replace(/\/+$/, '')
+
 // Set by the signed-in app with Clerk's useAuth().getToken
 let tokenGetter: (() => Promise<string | null>) | null = null
 export const setTokenGetter = (fn: () => Promise<string | null>) => { tokenGetter = fn }
@@ -18,7 +21,7 @@ async function authFetch(path: string, init: RequestInit = {}): Promise<Response
   const token = tokenGetter ? await tokenGetter() : null
   const headers = new Headers(init.headers)
   if (token) headers.set('Authorization', `Bearer ${token}`)
-  const res = await fetch(path, { ...init, headers })
+  const res = await fetch(API_URL + path, { ...init, headers })
   if (!res.ok) {
     let detail = `Errore ${res.status}`
     try {

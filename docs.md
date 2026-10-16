@@ -54,7 +54,7 @@ backend/
         └── profiles.py       /api/profiles/... (stylist)
 
 frontend/
-├── .env.example              VITE_CLERK_PUBLISHABLE_KEY
+├── .env.example              VITE_CLERK_PUBLISHABLE_KEY, VITE_API_URL (vuoto in locale)
 ├── vite.config.ts            Proxy /api → http://127.0.0.1:8000 (timeout 10 min)
 ├── index.html                Font (Cormorant Garamond, Inter), lingua it
 └── src/

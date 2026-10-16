@@ -27,7 +27,7 @@ uvicorn app.main:app --reload --port 8000
 # Frontend (altro terminale)
 cd frontend
 npm install
-copy .env.example .env            # poi compila VITE_CLERK_PUBLISHABLE_KEY
+copy .env.example .env            # poi compila VITE_CLERK_PUBLISHABLE_KEY (VITE_API_URL solo in produzione)
 npm run dev                       # http://localhost:5173 (proxy /api → :8000)
 ```
 
